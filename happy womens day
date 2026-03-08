@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins;
+background:#fff0f3;
+color:#333;
+overflow-x:hidden;
+scroll-behavior:smooth;
+}
+
+/* SECTIONS */
+
+section{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+section.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+.script{
+font-family:"Dancing Script";
+font-size:60px;
+color:#ff4d6d;
+}
+
+button{
+padding:12px 26px;
+border:none;
+background:#ff4d6d;
+color:white;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+margin-top:20px;
+}
+
+/* GALLERY */
+
+.gallery{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+margin-top:20px;
+}
+
+.gallery img{
+width:200px;
+border-radius:12px;
+box-shadow:0 6px 12px rgba(0,0,0,0.2);
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.1);
+}
+
+/* COUNTER */
+
+.counter{
+font-size:26px;
+color:#ff4d6d;
+margin-top:15px;
+}
+
+/* FLOATING HEARTS */
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:float 8s linear infinite;
+opacity:.7;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh)}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<section>
+
+<h1 class="script">Hey [Husaina]</h1>
+
+<p>I made something for you.</p>
+<p>Because I forgot something important today.</p>
+
+<button onclick="scrollToSection(1)">Open It ❤️</button>
+
+</section>
+
+
+<!-- PAGE 2 APOLOGY -->
+
+<section>
+
+<h1 class="script">I'm Sorry</h1>
+
+<p id="typeText"></p>
+
+<button onclick="scrollToSection(2)">Continue</button>
+
+</section>
+
+
+<!-- PAGE 3 MEMORIES -->
+
+<section>
+
+<h1 class="script">1100 Days With You</h1>
+
+<div class="counter">1100 Days ❤️</div>
+
+<p>
+1100 days of memories  
+1100 days of laughs  
+1100 days of loving you
+</p>
+
+<div class="gallery">
+
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+
+</div>
+
+<button onclick="scrollToSection(3)">One Last Thing</button>
+
+</section>
+
+
+<!-- PAGE 4 FINAL -->
+
+<section>
+
+<h1 class="script">Happy Women's Day ❤️</h1>
+
+<p>
+To the strongest, kindest and most beautiful woman I know.
+</p>
+
+<p>
+Thank you for being patient with me and staying with me.
+</p>
+
+<p>
+I'm incredibly lucky that I get to love you.
+</p>
+
+<p>
+And I hope we spend thousands more days together.
+</p>
+
+</section>
+
+
+<script>
+
+/* SCROLL NAV */
+
+function scrollToSection(index){
+
+window.scrollTo({
+top:window.innerHeight * index,
+behavior:"smooth"
+})
+
+}
+
+/* TYPEWRITER TEXT */
+
+const message = `
+I forgot to wish you on Women's Day today.
+And honestly someone as amazing as you should never be forgotten.
+
+So instead of sending a simple message,
+I wanted to make something special for you.
+`
+
+let i = 0
+
+function typeWriter(){
+
+if(i < message.length){
+
+document.getElementById("typeText").innerHTML += message.charAt(i)
+i++
+
+setTimeout(typeWriter,30)
+
+}
+
+}
+
+typeWriter()
+
+/* FADE IN ON SCROLL */
+
+const sections = document.querySelectorAll("section")
+
+window.addEventListener("scroll", () => {
+
+sections.forEach(sec => {
+
+const top = sec.getBoundingClientRect().top
+
+if(top < window.innerHeight - 100){
+sec.classList.add("visible")
+}
+
+})
+
+})
+
+/* FLOATING HEARTS */
+
+setInterval(()=>{
+
+let heart=document.createElement("div")
+
+heart.innerHTML="❤️"
+heart.className="heart"
+
+heart.style.left=Math.random()*100+"vw"
+heart.style.animationDuration=(5+Math.random()*5)+"s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>heart.remove(),8000)
+
+},800)
+
+</script>
+
+</body>
+</html>
